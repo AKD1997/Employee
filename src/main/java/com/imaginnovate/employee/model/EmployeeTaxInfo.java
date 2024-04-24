@@ -1,4 +1,4 @@
-package com.imaginnovate.employee.service.impl;
+package com.imaginnovate.employee.model;
 
 import lombok.Data;
 

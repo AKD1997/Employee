@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.imaginnovate.employee.model.Employee;
+import com.imaginnovate.employee.model.EmployeeTaxInfo;
 import com.imaginnovate.employee.service.EmployeeService;
 
 @Service
@@ -94,18 +95,32 @@ public class EmployeeServiceImpl implements EmployeeService {
 	        return 112500 + (yearlySalary - 1000000) * 0.20; // 20% Tax for yearly salary > 1000000
 	    }
 	}
-
-
+	
+	//Collect additional 2% cess for the amount more than 2500000
 	private Double calculateCessAmount(Double yearlySalary) 
 	{
 	    return yearlySalary > 2500000 ? (yearlySalary - 2500000) * 0.02 : 0;
 	}
 
-
-
-	// Employee validation logic
-	private boolean isValidEmployee(Employee employee) 
-	{
-	    return employee != null;
+	//Employee Validation helper methods
+	private boolean isValidEmployee(Employee employee) {
+	    if (employee == null) 
+	    {
+	        return false; // Employee object is null, invalid
+	    }
+	    
+	    // Check any mandatory fields are null or empty
+	    if (employee.getEmployeeId() == null || employee.getEmployeeId().isEmpty() ||
+	        employee.getFirstName() == null || employee.getFirstName().isEmpty() ||
+	        employee.getLastName() == null || employee.getLastName().isEmpty() ||
+	        employee.getEmail() == null || employee.getEmail().isEmpty() ||
+	        employee.getPhoneNumber() == null || employee.getPhoneNumber().isEmpty() ||
+	        employee.getDojDate() == null || employee.getSalary() == null) 
+	    {
+	        return false; // At least one mandatory field is null or empty, invalid
+	    }
+	    
+	    return true; // All mandatory fields are present, valid employee
 	}
+
 }

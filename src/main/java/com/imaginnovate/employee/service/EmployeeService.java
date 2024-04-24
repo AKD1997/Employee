@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import com.imaginnovate.employee.model.Employee;
-import com.imaginnovate.employee.service.impl.EmployeeTaxInfo;
+import com.imaginnovate.employee.model.EmployeeTaxInfo;
 
 public interface EmployeeService {
 
